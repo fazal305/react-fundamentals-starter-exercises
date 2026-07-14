@@ -16,11 +16,20 @@ Two minimal React setups built to learn the fundamentals before moving to larger
 - What it demonstrates: a real dev toolchain (fast refresh, JSX handled by the bundler, proper file extensions), plus a custom second component (`Fazal.jsx`).
 - How to run: `npm install` then `npm run dev` inside the `01vitereact` folder.
 
+### 02reactcounter
+
+- What it is: A Vite + React counter project focused on hooks, state updates, and reusable custom hook logic.
+- What it demonstrates: why hooks exist, how `useState` gives function components memory across renders, why state updates are scheduled instead of immediate, and how to extract reusable stateful behavior into a custom hook (`useBoundedCounter.js`).
+- How to run: `npm install` then `npm run dev` inside the `02reactcounter` folder.
+
 ## Lessons Learned
 
 - Component names must start with a capital letter, or JSX treats them as an HTML tag instead of a component.
 - Vite requires the `.jsx` extension for files containing JSX syntax; the CDN + Babel Standalone setup is more lenient about this.
 - A component can only return one root element — use a Fragment (`<>...</>`) when you don't need an extra wrapping DOM node, and a real `<div>` when you do (e.g. to apply a class).
+- Hooks exist because function components do not have instances where React can store changing values between renders; `useState` gives a function component memory across renders.
+- Calling a state setter like `setCounter(counter + 1)` does not change `counter` immediately in the current render; it schedules a re-render, so a `console.log(counter)` on the next line still shows the old value.
+- A custom hook is a reusable function that packages stateful logic; `useBoundedCounter(min, max)` keeps the counter rules in one place so multiple components can share the same behavior with different bounds.
 
 ## Next Steps
 
