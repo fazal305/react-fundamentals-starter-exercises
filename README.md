@@ -29,6 +29,7 @@ Two minimal React setups built to learn the fundamentals before moving to larger
 - A component can only return one root element — use a Fragment (`<>...</>`) when you don't need an extra wrapping DOM node, and a real `<div>` when you do (e.g. to apply a class).
 - Hooks exist because function components do not have instances where React can store changing values between renders; `useState` gives a function component memory across renders.
 - Calling a state setter like `setCounter(counter + 1)` does not change `counter` immediately in the current render; it schedules a re-render, so a `console.log(counter)` on the next line still shows the old value.
+- React state behaves like a snapshot for each render. If `counter` is `15` in the current render and an event handler calls `setCounter(counter + 1)` multiple times, each call still reads the same snapshot value, `15`. After the event handler finishes, React re-renders with the queued update, so the result is only `16` unless you use a functional update like `setCounter((current) => current + 1)`.
 - A custom hook is a reusable function that packages stateful logic; `useBoundedCounter(min, max)` keeps the counter rules in one place so multiple components can share the same behavior with different bounds.
 
 ## Next Steps

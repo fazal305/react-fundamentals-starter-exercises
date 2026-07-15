@@ -97,6 +97,30 @@ State or props change
 → React commit phase updates the browser DOM
 ```
 
+### State as a Snapshot
+
+React state behaves like a snapshot for each render. When a component renders, the state values used inside that render do not change inside the same function call or event handler.
+
+For example, if `counter` is `15` in the current render, this does not increase the counter three times:
+
+```javascript
+setCounter(counter + 1);
+setCounter(counter + 1);
+setCounter(counter + 1);
+```
+
+Each line reads the same snapshot value: `15`. So each line schedules `setCounter(16)`. After the event handler finishes, React re-renders the component, and the displayed value becomes `16`, not `18`.
+
+When the next state depends on the previous state, use a functional update:
+
+```javascript
+setCounter((currentCounter) => currentCounter + 1);
+setCounter((currentCounter) => currentCounter + 1);
+setCounter((currentCounter) => currentCounter + 1);
+```
+
+Here React passes the latest queued value into each update, so the counter can move from `15` to `18`.
+
 ### Hydration
 
 Hydration applies when HTML was already generated before React runs, usually through server-side rendering or static generation.
@@ -387,6 +411,7 @@ http://localhost:5173/
 - Props can be destructured with default values.
 - Stable list keys help React preserve identity during list changes.
 - Functional state updates are safest when the next state depends on the previous state.
+- State behaves like a snapshot for each render, so repeated `setCounter(counter + 1)` calls in one event handler read the same old value.
 - Tailwind CSS can be used cleanly with Vite through `@tailwindcss/vite`.
 
 ## Future Improvements
