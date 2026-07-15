@@ -1,6 +1,6 @@
 # React Fundamentals — Starter Exercises
 
-A growing React Fundamentals learning series built with professional conventions from day one: clean structure, focused exercises, reusable components, and documentation that explains what each project teaches.
+A growing React Fundamentals learning series built with professional conventions from day one: clean structure, focused exercises, reusable components, accurate React terminology, and documentation that explains what each project teaches.
 
 ## Projects
 
@@ -34,6 +34,12 @@ A growing React Fundamentals learning series built with professional conventions
 - What it demonstrates: `useState` initial values, why reload resets memory-only state, correct `onClick` argument passing, reusable data-driven components, the real DOM `backgroundColor` property, and `useEffect` for syncing React state with `document.body`.
 - How to run: `npm install` then `npm run dev` inside the `04reactbgchanger` folder.
 
+### 05reactpasswordgenerator
+
+- What it is: A Vite + React password generator using Tailwind CSS and the Clipboard API.
+- What it demonstrates: `useState`, `useCallback`, `useEffect`, and `useRef` working together in one practical app, including hook dependencies, stable state setters, controlled form inputs, password generation, clipboard copying, input selection, and timer cleanup.
+- How to run: `npm install` then `npm run dev` inside the `05reactpasswordgenerator` folder.
+
 ## Lessons Learned
 
 - Component names must start with a capital letter, or JSX treats them as HTML tags instead of React components.
@@ -46,6 +52,14 @@ A growing React Fundamentals learning series built with professional conventions
 - Repeated `setCounter(counter + 1)` calls in one event handler read the same old snapshot value.
 - Functional updates like `setCounter((current) => current + 1)` are safest when the next state depends on the previous state.
 - Custom hooks package reusable stateful logic into small, importable functions.
+- `useCallback` returns a memoized function reference; it does not automatically call the function.
+- `useCallback` dependencies decide when React should create a new callback reference.
+- `useEffect` runs after React commits a render.
+- `useEffect` dependencies decide when an effect should run again.
+- Effect cleanup is important for clearing timers and avoiding stale work.
+- `useRef` can store a mutable value across renders without causing another render.
+- `useRef` can also reference a real DOM element, such as an input.
+- React state setter functions have stable identities, so setters like `setPassword` do not need to be listed in dependency arrays.
 - `createRoot()` attaches React to a real browser DOM container. It does not create a second real DOM.
 - React components produce an element tree that describes the UI.
 - The Virtual DOM is a common name for React's in-memory UI representation.
@@ -57,8 +71,15 @@ A growing React Fundamentals learning series built with professional conventions
 - Stable list keys help React preserve item identity during reordering, insertion, and removal.
 - `onClick` needs a function reference, not the result of calling a function during render.
 - Use `onClick={() => handler(value)}` when an event handler needs an argument.
+- `onChange` handles changes to form controls such as ranges and checkboxes.
 - `document.body.style.backgroundColor` is the correct DOM style property; `bgColor` silently fails.
 - `useEffect` is the right tool for synchronizing React state with something outside React's rendered tree, such as `document.body`.
+- `Math.floor(Math.random() * source.length)` creates valid zero-based indexes from `0` through `source.length - 1`.
+- Do not add `1` to a random string index; it skips index `0` and can create an invalid final index.
+- JavaScript strings are immutable and do not have `splice()`.
+- Use `slice()` or `substring()` to extract part of a string.
+- Selecting text in an input and choosing what to pass to `navigator.clipboard.writeText()` are separate operations.
+- Clipboard writes can fail and should be handled with `try...catch`.
 - Tailwind CSS works cleanly with Vite using `tailwindcss`, `@tailwindcss/vite`, and `@import "tailwindcss";`.
 
 ## How To Run A Vite Project
@@ -86,15 +107,17 @@ react-fundamentals-starter-exercises/
   02reactcounter/
   03reactfiberprops/
   04reactbgchanger/
+  05reactpasswordgenerator/
   README.md
   .gitignore
 ```
 
 ## Next Steps
 
-- Practice forms and controlled inputs.
-- Practice conditional rendering with real UI states.
+- Practice form validation and inline error messages.
 - Practice lifting state up between sibling components.
-- Practice `useEffect` with cleanup.
+- Practice `useEffect` cleanup with subscriptions or event listeners.
 - Practice `localStorage` persistence.
 - Practice `useReducer` for more structured state updates.
+- Practice `React.memo` to observe callback reference behavior.
+- Replace `Math.random()` with Web Crypto API randomness in a future security-focused version.
