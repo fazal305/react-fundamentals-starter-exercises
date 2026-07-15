@@ -46,6 +46,18 @@ A growing React Fundamentals learning series built with professional conventions
 - What it demonstrates: custom hooks, reusable asynchronous data-fetching logic, controlled inputs, props-driven reusable components, stable option keys, loading and error states, API response normalization, `AbortController` request cancellation, currency conversion calculations, and safe swap behavior.
 - How to run: `npm install` then `npm run dev` inside the `06reactcurrencyconverter` folder.
 
+### 07reactrouter
+
+- What it is: A Vite + React Router learning hub using Tailwind CSS.
+- What it demonstrates: client-side routing, `BrowserRouter`, `Routes`, `Route`, `Link`, `NavLink`, layout routes, `Outlet`, nested routes, dynamic URL parameters, `useParams`, `useNavigate`, `useLocation`, navigation state, redirects, and catch-all 404 routes.
+- How to run: `npm install` then `npm run dev` inside the `07reactrouter` folder.
+
+### 08reactcontexttheme
+
+- What it is: A Vite + React Context API theme lab using Tailwind CSS v4 dark variants.
+- What it demonstrates: prop drilling, `createContext`, context providers, `useContext`, a custom `useTheme()` hook, global theme state, controlled checkbox inputs, root HTML class synchronization, Tailwind `@custom-variant dark`, localStorage persistence, and the difference between props and context.
+- How to run: `npm install` then `npm run dev` inside the `08reactcontexttheme` folder.
+
 ## Lessons Learned
 
 - Component names must start with a capital letter, or JSX treats them as HTML tags instead of React components.
@@ -82,7 +94,7 @@ A growing React Fundamentals learning series built with professional conventions
 - Source and target currency selects should be controlled by separate state values.
 - Stable list keys help React preserve item identity during reordering, insertion, and removal.
 - Missing keys usually produce warnings rather than crashing the app.
-- Stable unique values, such as currency codes, are good keys when they uniquely identify sibling items.
+- Stable unique values, such as IDs or currency codes, are good keys when they uniquely identify sibling items.
 - Avoid array indexes as keys when list order can change.
 - `onClick` needs a function reference, not the result of calling a function during render.
 - Use `onClick={() => handler(value)}` when an event handler needs an argument.
@@ -102,6 +114,39 @@ A growing React Fundamentals learning series built with professional conventions
 - Swapping related state should avoid converting with stale rates in the same event.
 - Number formatting with `Intl.NumberFormat` should stay separate from numeric state.
 - Public APIs can change response formats, rate limits, authentication rules, or availability.
+- Client-side routing creates a multi-page user experience with one HTML document and multiple route components.
+- `BrowserRouter` uses the browser History API and should wrap the app once.
+- `Routes` chooses the matching `Route` branch for the current URL.
+- `Link` is for internal client-side navigation.
+- Normal anchors are still correct for external websites, downloads, `mailto:`, `tel:`, and same-document fragments.
+- `NavLink` adds active route state and is useful for menus, tabs, and sidebars.
+- The home `NavLink` should use `end` so `/` does not match every route.
+- Layout routes share structure and render child routes with `Outlet`.
+- Nested routes can have their own nested layouts.
+- Dynamic route segments like `:courseId` are read with `useParams()`.
+- URL parameters are strings and should be validated before use.
+- `useNavigate()` is for app-driven navigation such as form completion, redirects after actions, or back navigation.
+- Navigation state is temporary context, not permanent storage.
+- `useLocation()` exposes read-only route information such as `pathname`, `search`, `hash`, and `state`.
+- `Navigate` can redirect a route, and `replace` avoids adding an extra history entry.
+- A catch-all `path="*"` route handles unknown URLs.
+- BrowserRouter deployments usually need an SPA fallback that serves `index.html` for app routes.
+- Prop drilling happens when data is passed through intermediate components only so a deeper component can use it.
+- Context is useful for shared values needed by distant descendants, but it does not replace props.
+- `createContext()` creates a context channel; the live value comes from the provider.
+- A context provider owns state and passes a value to descendants through `Context.Provider`.
+- `useContext()` reads the nearest matching provider value above the component in the React tree.
+- A custom context hook such as `useTheme()` gives one safe, consistent way to read context.
+- Provider placement matters: consumers must render below the matching provider.
+- Context consumers can re-render when the provider value they read changes.
+- Memoizing provider actions with `useCallback` and provider values with `useMemo` can avoid avoidable reference changes without preventing legitimate theme updates.
+- A controlled checkbox uses `checked` and `onChange`, not `value` alone.
+- Tailwind CSS v4 can define class-based dark mode in CSS with `@custom-variant dark`.
+- Applying `.dark` to `document.documentElement` lets Tailwind `dark:` utilities respond across the app.
+- `localStorage` can persist simple preferences such as `light` or `dark`.
+- Lazy state initialization avoids reading localStorage on every render.
+- System color preference can be used as a first-visit fallback with `matchMedia`.
+- Hooks such as `useTheme()` must be called at the top level of components or custom hooks.
 - Tailwind CSS works cleanly with Vite using `tailwindcss`, `@tailwindcss/vite`, and `@import "tailwindcss";`.
 
 ## How To Run A Vite Project
@@ -131,6 +176,8 @@ react-fundamentals-starter-exercises/
   04reactbgchanger/
   05reactpasswordgenerator/
   06reactcurrencyconverter/
+  07reactrouter/
+  08reactcontexttheme/
   README.md
   .gitignore
 ```
@@ -144,4 +191,8 @@ react-fundamentals-starter-exercises/
 - Practice `useReducer` for more structured state updates.
 - Practice `React.memo` to observe callback reference behavior.
 - Add caching to the currency converter custom hook.
+- Add route-level lazy loading and Suspense fallbacks.
+- Add route loaders, protected routes, and search parameters.
+- Split context state and context actions into separate providers.
+- Add system theme mode and prevent initial theme flash before React loads.
 - Replace `Math.random()` with Web Crypto API randomness in a future security-focused version.
