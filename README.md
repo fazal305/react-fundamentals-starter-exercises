@@ -1,6 +1,6 @@
 # React Fundamentals — Starter Exercises
 
-Two minimal React setups built to learn the fundamentals before moving to larger projects: one running React directly via CDN with no build tool, and one scaffolded properly with Vite.
+Minimal React exercises built to learn the fundamentals before moving to larger projects: React through CDN, React with Vite, hooks and state, and render-tree concepts with props and Tailwind CSS.
 
 ## Projects
 
@@ -21,6 +21,12 @@ Two minimal React setups built to learn the fundamentals before moving to larger
 - What it is: A Vite + React counter project focused on hooks, state updates, and reusable custom hook logic.
 - What it demonstrates: why hooks exist, how `useState` gives function components memory across renders, why state updates are scheduled instead of immediate, and how to extract reusable stateful behavior into a custom hook (`useBoundedCounter.js`).
 - How to run: `npm install` then `npm run dev` inside the `02reactcounter` folder.
+
+### 03reactfiberprops
+
+- What it is: A Vite + React learning lab focused on React's render tree, reconciliation, Fiber, props, list keys, hydration concepts, Tailwind CSS, and state snapshots.
+- What it demonstrates: how `createRoot()` connects React to a DOM container, how component re-renders work, how props configure reusable components, why stable keys matter, and why repeated `setCounter(counter + 1)` calls read the same render snapshot.
+- How to run: `npm install` then `npm run dev` inside the `03reactfiberprops` folder.
 
 ## Lessons Learned
 

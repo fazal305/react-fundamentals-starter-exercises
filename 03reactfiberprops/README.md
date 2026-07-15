@@ -1,4 +1,4 @@
-# 06reactfiberprops — React Render Lab
+# 03reactfiberprops — React Render Lab
 
 A React Fundamentals exercise exploring createRoot, React's render tree, Virtual DOM concepts, reconciliation, Fiber, hydration, props, list keys, Tailwind CSS, and reusable components.
 
@@ -18,6 +18,7 @@ A React Fundamentals exercise exploring createRoot, React's render tree, Virtual
 - Learn why stable list keys matter.
 - Use Tailwind CSS with a modern Vite React setup.
 - Use functional state updates for safe counter logic.
+- Demonstrate React's "state as a snapshot" behavior in real UI code.
 
 ## Concepts Covered
 
@@ -312,7 +313,7 @@ VS Code terminals, running dev servers, File Explorer windows, or antivirus tool
 ## Project Structure
 
 ```text
-06reactfiberprops/
+03reactfiberprops/
   src/
     components/
       Counter.jsx
@@ -320,6 +321,7 @@ VS Code terminals, running dev servers, File Explorer windows, or antivirus tool
       RenderTracker.jsx
       ReconciliationList.jsx
       ConceptPanel.jsx
+      SnapshotDemo.jsx
     data/
       cards.js
       concepts.js
@@ -359,6 +361,12 @@ Displays how many times a component has rendered.
 
 It uses `useRef()` because refs can remember values between renders without causing another render.
 
+### SnapshotDemo
+
+An interactive state snapshot demo.
+
+It starts the counter at `15`. The `+3 using snapshot value` button calls `setCounter(counter + 1)` three times, but all three calls read the same render snapshot, so the value only becomes `16`. The `+3 using functional updates` button calls `setCounter((currentCounter) => currentCounter + 1)` three times, so React applies each update to the latest queued value and the counter increases by `3`.
+
 ### ReconciliationList
 
 A dynamic keyed list.
@@ -392,6 +400,7 @@ http://localhost:5173/
 - Pass different prop types.
 - Add another concept card.
 - Observe render counts.
+- Compare the snapshot update button with the functional update button.
 - Inspect DOM nodes in browser devtools.
 
 ## Lessons Learned

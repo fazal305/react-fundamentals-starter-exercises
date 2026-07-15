@@ -4,6 +4,7 @@ import InfoCard from "./components/InfoCard";
 import ReconciliationList from "./components/ReconciliationList";
 import RenderTracker from "./components/RenderTracker";
 import ConceptPanel from "./components/ConceptPanel";
+import SnapshotDemo from "./components/SnapshotDemo";
 import { cards } from "./data/cards";
 import { concepts } from "./data/concepts";
 
@@ -85,6 +86,8 @@ function App() {
             <Counter label="Large Counter" min={0} max={30} initialValue={10} />
           </div>
         </section>
+
+        <SnapshotDemo />
 
         <section className="space-y-4">
           <div>
