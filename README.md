@@ -1,6 +1,6 @@
 # React Fundamentals — Starter Exercises
 
-A growing React Fundamentals learning series built with professional conventions from day one: clean structure, focused exercises, reusable components, accurate React terminology, and documentation that explains what each project teaches.
+A growing React Fundamentals learning series built with professional conventions from day one: clean structure, focused exercises, reusable components, reusable custom hooks, accurate React terminology, and documentation that explains what each project teaches.
 
 ## Projects
 
@@ -40,6 +40,12 @@ A growing React Fundamentals learning series built with professional conventions
 - What it demonstrates: `useState`, `useCallback`, `useEffect`, and `useRef` working together in one practical app, including hook dependencies, stable state setters, controlled form inputs, password generation, clipboard copying, input selection, and timer cleanup.
 - How to run: `npm install` then `npm run dev` inside the `05reactpasswordgenerator` folder.
 
+### 06reactcurrencyconverter
+
+- What it is: A Vite + React currency converter using Tailwind CSS, the Fetch API, and a reusable custom hook.
+- What it demonstrates: custom hooks, reusable asynchronous data-fetching logic, controlled inputs, props-driven reusable components, stable option keys, loading and error states, API response normalization, `AbortController` request cancellation, currency conversion calculations, and safe swap behavior.
+- How to run: `npm install` then `npm run dev` inside the `06reactcurrencyconverter` folder.
+
 ## Lessons Learned
 
 - Component names must start with a capital letter, or JSX treats them as HTML tags instead of React components.
@@ -51,12 +57,14 @@ A growing React Fundamentals learning series built with professional conventions
 - React state behaves like a snapshot for each render.
 - Repeated `setCounter(counter + 1)` calls in one event handler read the same old snapshot value.
 - Functional updates like `setCounter((current) => current + 1)` are safest when the next state depends on the previous state.
-- Custom hooks package reusable stateful logic into small, importable functions.
+- Custom hooks are normal JavaScript functions whose names start with `use` and which can call other React hooks.
+- Custom hooks package reusable hook-based logic such as state, effects, fetching, loading, errors, and data transformation.
+- Hooks should return reusable data and functions, not UI markup.
 - `useCallback` returns a memoized function reference; it does not automatically call the function.
 - `useCallback` dependencies decide when React should create a new callback reference.
 - `useEffect` runs after React commits a render.
 - `useEffect` dependencies decide when an effect should run again.
-- Effect cleanup is important for clearing timers and avoiding stale work.
+- Effect cleanup is important for clearing timers, cancelling requests, and avoiding stale work.
 - `useRef` can store a mutable value across renders without causing another render.
 - `useRef` can also reference a real DOM element, such as an input.
 - React state setter functions have stable identities, so setters like `setPassword` do not need to be listed in dependency arrays.
@@ -68,10 +76,17 @@ A growing React Fundamentals learning series built with professional conventions
 - Hydration is different from normal Vite client rendering; hydration connects React behavior to HTML that already exists.
 - Props pass read-only data from parent components to child components.
 - Props can be strings, numbers, arrays, objects, booleans, and functions.
+- Props-driven components make it possible to reuse one component in multiple roles instead of duplicating JSX.
+- Controlled inputs keep form values in React state.
+- HTML input values arrive as strings and should be normalized before numeric calculations.
+- Source and target currency selects should be controlled by separate state values.
 - Stable list keys help React preserve item identity during reordering, insertion, and removal.
+- Missing keys usually produce warnings rather than crashing the app.
+- Stable unique values, such as currency codes, are good keys when they uniquely identify sibling items.
+- Avoid array indexes as keys when list order can change.
 - `onClick` needs a function reference, not the result of calling a function during render.
 - Use `onClick={() => handler(value)}` when an event handler needs an argument.
-- `onChange` handles changes to form controls such as ranges and checkboxes.
+- `onChange` handles changes to form controls such as ranges, text inputs, checkboxes, and selects.
 - `document.body.style.backgroundColor` is the correct DOM style property; `bgColor` silently fails.
 - `useEffect` is the right tool for synchronizing React state with something outside React's rendered tree, such as `document.body`.
 - `Math.floor(Math.random() * source.length)` creates valid zero-based indexes from `0` through `source.length - 1`.
@@ -80,6 +95,13 @@ A growing React Fundamentals learning series built with professional conventions
 - Use `slice()` or `substring()` to extract part of a string.
 - Selecting text in an input and choosing what to pass to `navigator.clipboard.writeText()` are separate operations.
 - Clipboard writes can fail and should be handled with `try...catch`.
+- API configuration should be centralized so provider details do not leak across the app.
+- Fetch responses should be validated before the UI uses them.
+- `AbortController` can cancel stale fetch requests when dependencies change.
+- Currency conversion uses `amount * targetRate` when rates are relative to the selected source currency.
+- Swapping related state should avoid converting with stale rates in the same event.
+- Number formatting with `Intl.NumberFormat` should stay separate from numeric state.
+- Public APIs can change response formats, rate limits, authentication rules, or availability.
 - Tailwind CSS works cleanly with Vite using `tailwindcss`, `@tailwindcss/vite`, and `@import "tailwindcss";`.
 
 ## How To Run A Vite Project
@@ -108,6 +130,7 @@ react-fundamentals-starter-exercises/
   03reactfiberprops/
   04reactbgchanger/
   05reactpasswordgenerator/
+  06reactcurrencyconverter/
   README.md
   .gitignore
 ```
@@ -116,8 +139,9 @@ react-fundamentals-starter-exercises/
 
 - Practice form validation and inline error messages.
 - Practice lifting state up between sibling components.
-- Practice `useEffect` cleanup with subscriptions or event listeners.
+- Practice `useEffect` cleanup with subscriptions, timers, and request cancellation.
 - Practice `localStorage` persistence.
 - Practice `useReducer` for more structured state updates.
 - Practice `React.memo` to observe callback reference behavior.
+- Add caching to the currency converter custom hook.
 - Replace `Math.random()` with Web Crypto API randomness in a future security-focused version.
