@@ -58,6 +58,12 @@ A growing React Fundamentals learning series built with professional conventions
 - What it demonstrates: prop drilling, `createContext`, context providers, `useContext`, a custom `useTheme()` hook, global theme state, controlled checkbox inputs, root HTML class synchronization, Tailwind `@custom-variant dark`, localStorage persistence, and the difference between props and context.
 - How to run: `npm install` then `npm run dev` inside the `08reactcontexttheme` folder.
 
+### 09reactcontexttodo
+
+- What it is: A Vite + React Context API todo lab using Tailwind CSS and localStorage.
+- What it demonstrates: applying the Context/Provider/custom-hook pattern to a CRUD data model, immutable add/update/delete/toggle state updates, stable todo IDs, a barrel `index.js` export, controlled form inputs, lazy localStorage reads, JSON persistence, and clean component splitting.
+- How to run: `npm install` then `npm run dev` inside the `09reactcontexttodo` folder.
+
 ## Lessons Learned
 
 - Component names must start with a capital letter, or JSX treats them as HTML tags instead of React components.
@@ -147,6 +153,17 @@ A growing React Fundamentals learning series built with professional conventions
 - Lazy state initialization avoids reading localStorage on every render.
 - System color preference can be used as a first-visit fallback with `matchMedia`.
 - Hooks such as `useTheme()` must be called at the top level of components or custom hooks.
+- Context can share full data models such as arrays plus action functions, not just single primitive values.
+- React state arrays should be updated immutably with new arrays and new objects for changed items.
+- `push()` and `splice()` mutate arrays and should not be used for React state CRUD updates.
+- `map()` can update or toggle one matching item while preserving unchanged item references.
+- `filter()` can delete an item by returning a new shorter array.
+- Todo identity should come from stable IDs, not array positions.
+- `crypto.randomUUID()` is useful for generating stable client-side IDs when available.
+- A barrel `index.js` can reduce import-path repetition without changing how Context works.
+- localStorage stores strings, so arrays and objects need `JSON.stringify` and `JSON.parse`.
+- Reading persisted state in a lazy `useState` initializer avoids an extra first render.
+- `JSON.parse(null)` is safe, but corrupted or empty stored strings can throw and should be handled with `try/catch`.
 - Tailwind CSS works cleanly with Vite using `tailwindcss`, `@tailwindcss/vite`, and `@import "tailwindcss";`.
 
 ## How To Run A Vite Project
@@ -178,6 +195,7 @@ react-fundamentals-starter-exercises/
   06reactcurrencyconverter/
   07reactrouter/
   08reactcontexttheme/
+  09reactcontexttodo/
   README.md
   .gitignore
 ```
@@ -195,4 +213,5 @@ react-fundamentals-starter-exercises/
 - Add route loaders, protected routes, and search parameters.
 - Split context state and context actions into separate providers.
 - Add system theme mode and prevent initial theme flash before React loads.
+- Add filtering, sorting, and cross-tab storage synchronization to the todo app.
 - Replace `Math.random()` with Web Crypto API randomness in a future security-focused version.
