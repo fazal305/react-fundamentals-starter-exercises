@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background: #f8fafc;
+}
+
+.blog-content :where(h1, h2, h3) {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.blog-content :where(p, ul, ol, blockquote) {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.blog-content :where(ul, ol) {
+  padding-left: 1.5rem;
+}
+
+.blog-content ul {
+  list-style: disc;
+}
+
+.blog-content ol {
+  list-style: decimal;
+}

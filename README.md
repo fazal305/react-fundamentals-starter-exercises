@@ -1,4 +1,4 @@
-# React Fundamentals — Starter Exercises
+# React Fundamentals - Starter Exercises
 
 A growing React Fundamentals learning series built with professional conventions from day one: clean structure, focused exercises, reusable components, reusable custom hooks, accurate React terminology, and documentation that explains what each project teaches.
 
@@ -63,6 +63,18 @@ A growing React Fundamentals learning series built with professional conventions
 - What it is: A Vite + React Context API todo lab using Tailwind CSS and localStorage.
 - What it demonstrates: applying the Context/Provider/custom-hook pattern to a CRUD data model, immutable add/update/delete/toggle state updates, stable todo IDs, a barrel `index.js` export, controlled form inputs, lazy localStorage reads, JSON persistence, and clean component splitting.
 - How to run: `npm install` then `npm run dev` inside the `09reactcontexttodo` folder.
+
+### 10reactreduxtodo
+
+- What it is: A Vite + React Redux Toolkit todo lab using Tailwind CSS and localStorage.
+- What it demonstrates: rebuilding the `09reactcontexttodo` CRUD feature with `configureStore`, `createSlice`, generated action creators, Immer draft updates, `useSelector`, `useDispatch`, `preloadedState`, and `store.subscribe`.
+- How to run: `npm install` then `npm run dev` inside the `10reactreduxtodo` folder.
+
+### 11reactmegablog
+
+- What it is: A production-shaped Vite + React blog platform backed by Appwrite.
+- What it demonstrates: Appwrite auth, TablesDB rows, Storage uploads, protected routes, Redux Toolkit auth state, React Hook Form, TinyMCE rich text editing, `html-react-parser`, centralized environment config, and deployment configuration.
+- How to run: create an Appwrite project, copy `.env.sample` to `.env`, fill in the real values, then `npm install` and `npm run dev` inside the `11reactmegablog` folder.
 
 ## Lessons Learned
 
@@ -164,6 +176,27 @@ A growing React Fundamentals learning series built with professional conventions
 - localStorage stores strings, so arrays and objects need `JSON.stringify` and `JSON.parse`.
 - Reading persisted state in a lazy `useState` initializer avoids an extra first render.
 - `JSON.parse(null)` is safe, but corrupted or empty stored strings can throw and should be handled with `try/catch`.
+- Redux Toolkit reduces plain Redux boilerplate by generating action creators and action types from slices.
+- `react-redux` bridges React components to the Redux store with `<Provider>`, `useSelector()`, and `useDispatch()`.
+- `configureStore()` creates the Redux store and can receive `preloadedState` for startup data.
+- `createSlice()` groups slice state, reducer logic, and generated action creators in one feature file.
+- In a slice reducer, `state` means that slice's state, and `action.payload` is the value passed to the generated action creator.
+- Immer makes draft mutation safe inside Redux Toolkit slice reducers, but that does not mean plain React state should be mutated.
+- Inside one Immer reducer, either mutate the draft or return a new value; do not mix both patterns in the same reducer.
+- Redux reducers should stay pure, so IDs and timestamps are better created before dispatch.
+- `useSelector()` can subscribe a component to a specific selected value instead of a whole shared context value object.
+- Redux persistence can be handled outside React components with `preloadedState` and `store.subscribe()`.
+- Backend SDK calls should be wrapped in a service layer instead of scattered through React components.
+- Vite client environment variables must start with `VITE_`.
+- Environment variable reads should be centralized so renaming or auditing config is easier.
+- Auth status and current user are good Redux state because protected routes, headers, and pages all need them.
+- Form drafts and editor content should stay local or inside React Hook Form until submitted.
+- React Hook Form's `register`, `handleSubmit`, and `formState.errors` reduce manual form boilerplate.
+- React 19 receives `ref` as a regular prop; React 18 and earlier use `forwardRef`.
+- Appwrite's current database terminology is tables, columns, and rows, while many older tutorials say collections, attributes, and documents.
+- Appwrite CORS errors usually mean the hostname must be registered as a Web Platform in the Appwrite console.
+- Appwrite Storage upload failures can come from bucket file-size limits, not broken React code.
+- Rendering rich text HTML requires a trust boundary; `html-react-parser` still renders real HTML.
 - Tailwind CSS works cleanly with Vite using `tailwindcss`, `@tailwindcss/vite`, and `@import "tailwindcss";`.
 
 ## How To Run A Vite Project
@@ -196,6 +229,8 @@ react-fundamentals-starter-exercises/
   07reactrouter/
   08reactcontexttheme/
   09reactcontexttodo/
+  10reactreduxtodo/
+  11reactmegablog/
   README.md
   .gitignore
 ```
