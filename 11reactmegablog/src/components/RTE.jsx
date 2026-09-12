@@ -46,7 +46,7 @@ function RTE({ name, control, label, defaultValue = "" }) {
               toolbar:
                 "undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
               content_style:
-                "body { font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.7; }",
+                "body { font-family: Karla, system-ui, sans-serif; font-size: 16px; line-height: 1.7; }",
             }}
           />
         )}
